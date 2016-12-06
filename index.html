@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home | Project Allergi</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Bootswatch Styling for Improving the Aesthetics -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css">
+
+	<!-- Font Awesome CSS Icons (For cool glyphicons) -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			
+			<h1><i class="fa fa-heartbeat"></i> Project Allergi</h1>
+			<h4>Some tagline here</h4>
+			<!-- add image/logo here -->
+
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="col-md-4">
+			
+				<label for="ingredientInput">Search by ingredients</label><br>
+				<input id="ingredientInput" type="text" name="ingredientInput">
+				<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+			
+				<label for="productInput">Search by product</label><br>
+				<input id="productInput" type="text" name="productInput"/>
+				<button class="btn btn-primary" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+			
+				<label for="recipeInput">Search by recipes</label><br>
+				<input id="recipeInput" type="text" name="recipeInput"/>
+				<button class="btn btn-primary" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		</div>
+		<div class="col-md-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Search Results</div> 
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Ingredient</th>
+										<!-- We can change this so it is color-based (red, yellow, green) -->
+										<th>Allergen status <br>(0 = none, 1 = may contain, 2 = contains)</th>
+									</tr>
+								</thead>
+								<tbody id="new-input">
+									<tr> 
+										<td>i.e. Peanuts</td>
+										<td>2</td>
+									</tr>
+									<tr> 
+										<td>i.e. High fructose corn syrup</td>
+										<td>2</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -13,9 +13,11 @@
   
   //LabelAPI key: x49rczhgarkyz7hzpxsez2nn
   var labelAPIkey = "x49rczhgarkyz7hzpxsez2nn";
+  var askSID = "https://crossorigin.me/https://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
+
   var searchInput = $("#productInput").val().trim();
 
-  var queryURL = "https://api.foodessentials.com/searchprods?q=bacon&sid=f8f501c8-4980-4433-8437-66ca0f01018d&n=10&s=0&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
+  var queryURL = "https://crossorigin.me/https://api.foodessentials.com/searchprods?q=bacon&sid=f8f501c8-4980-4433-8437-66ca0f01018d&n=10&s=0&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
   //"http://api.foodessentials.com/ingredientsearch?q=" + "peanut" + "&sid=3ea500b1-5ce7-4b8c-88bf-c644da9d728b&n=10&s=1&f=json&api_key=" + labelAPIkey;
 	
  	var getAllergen =  "http://api.foodessentials.com/getallergenadditive?u=+%09++" + upc + "&sid=test&f=json&property=" + "allergens[j]" + "&propType=allergen&api_key=" + labelAPIkey;	
@@ -59,8 +61,8 @@
   renderButtons();
 
   $.ajax({
-        url: queryURL,
-        headers: {'X-Originating-Ip': '72.20.129.155'},
+        url: askSID,
+        headers: {'X-Originating-Ip':'72.20.129.155'},
         method: 'GET'
     }).done(function(response) {
     	// searchInput = $("#productInput").val().trim();

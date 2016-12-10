@@ -8,23 +8,45 @@
   };
   firebase.initializeApp(config);
 
-  var allergens = ["corn", "shellfish", "egg", "milk", "peanuts"];
-  var upc = [];
-  
+  database = firebase.database();
+
   //LabelAPI key: x49rczhgarkyz7hzpxsez2nn
   var labelAPIkey = "x49rczhgarkyz7hzpxsez2nn";
-  var askSID = "https://crossorigin.me/https://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
+  var allergens = ["corn", "shellfish", "egg", "milk", "peanuts"];
+  var searchInput = '';
+  var upc = [];
+  var labelURL = ''; 
+  var sid = '';
 
-  var searchInput = $("#productInput").val().trim();
+  $(document).on("click", "#add-product", function() {
+    console.log(sid);
+    searchInput = $("#productInput").val().trim();
+    console.log("My SI: " + searchInput);
+    labelURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + "ad257332-9bf5-4866-997c-9847dbd29f07" + "&n=10&s=0&f=json&api_key=" + labelAPIkey;
 
-  var queryURL = "https://crossorigin.me/https://api.foodessentials.com/searchprods?q=bacon&sid=f8f501c8-4980-4433-8437-66ca0f01018d&n=10&s=0&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
-  //"http://api.foodessentials.com/ingredientsearch?q=" + "peanut" + "&sid=3ea500b1-5ce7-4b8c-88bf-c644da9d728b&n=10&s=1&f=json&api_key=" + labelAPIkey;
-	
- 	var getAllergen =  "http://api.foodessentials.com/getallergenadditive?u=+%09++" + upc + "&sid=test&f=json&property=" + "allergens[j]" + "&propType=allergen&api_key=" + labelAPIkey;	
+    // Code for handling the push
+    database.ref().push({
+      searchInput: searchInput
+    });
+
+    $("#productInput").val("");
+
+    $.ajax({
+        url: labelURL,    
+        method: 'GET'
+    }).done(function(response) {
+      // searchInput = $("#productInput").val().trim();
+      console.log(response);
+      for(i = 0; i < 10; i++){
+        console.log("Name: " + response.productsArray[i].product_name);
+        console.log("Description: " + response.productsArray[i].product_description);
+        console.log("UPC: " + response.productsArray[i].upc);
+      }   
+    });
+  });
 
   //Render allergen buttons
   function renderButtons(){ 
-
     // Deletes the allergens prior to adding new allergens (this is necessary otherwise you will have repeat buttons)
     $('#buttons-appear-here').empty();
   
@@ -35,7 +57,6 @@
   };
   
   // ========================================================
-
   // This function handles events where one button is clicked
   $('#add-allergens').on('click', function(){
 
@@ -54,21 +75,5 @@
     return false;
   });
 
-
   // ========================================================
-
-  // This calls the renderButtons() function
   renderButtons();
-
-  $.ajax({
-        url: askSID,
-        headers: {'X-Originating-Ip':'72.20.129.155'},
-        method: 'GET'
-    }).done(function(response) {
-    	// searchInput = $("#productInput").val().trim();
-    	console.log(response);
-    	//console.log(response.arrayIngredients[0][1]);
-    	// $("#new-input").append("<tr><td>" + )
-        
-    });
-

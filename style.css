@@ -1,0 +1,17 @@
+.allergen-icons {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+}
+
+.allergen-icons-div {
+	border: 1px solid red;
+}
+
+.allergen-icons-button:hover {
+	background-color: #e00;
+}
+
+.displayOff {
+	display: none;
+}

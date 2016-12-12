@@ -30,34 +30,77 @@
 		</div>
 	</div>
 	
-	<div class="container">
-		<form id="allergens-form">
-			<label for="allergensInput"><h4>Enter the allergens you are worried about: </h4></label>
-			<input id="allergensInput" type="text" name="allergensInput"/> <button id="add-allergens" type="submit" class="btn btn-default btn-sm">
-	        <span class="glyphicon glyphicon-plus" "></span></button>
-			<br><br>
-		</form>
-		
-		 
-	</div>
+	<div class="container allergen-icons-buttons-div text-center" id="buttons-appear-here">
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="cereals" src="assets/images/cereals.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="shellfish" src="assets/images/shellfish.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="egg" src="assets/images/egg.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="fish" src="assets/images/fish.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="milk" src="assets/images/milk.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="peanuts" src="assets/images/peanuts.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="sulfite" src="assets/images/sulfite.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="tree-nuts" src="assets/images/tree-nuts.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="soybean" src="assets/images/soybean.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="sesame-seeds" src="assets/images/sesame-seeds.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="gluten" src="assets/images/gluten.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="lactose" src="assets/images/lactose.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="cereals" src="assets/images/corn.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="cereals" src="assets/images/wheat.png"/>
+		</button>
+		<button class="allergen-icons-button">
+			<img class="allergen-icons" alt="cereals" src="assets/images/coconut.png"/>
+		</button>
+	</div><br><br>
 
 	<div class="container">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			
-				<label for="ingredientInput">Search by ingredients</label><br>
-				<input id="ingredientInput" type="text" name="ingredientInput">
-				<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+			<label for="ingredientInput">Search by ingredients</label><br>
+			<input id="ingredientInput" type="text" name="ingredientInput">
+			<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+		
+			<label for="productInput">Search by product</label><br>
+			<input id="productInput" type="text" name="productInput"/>
+			<button class="btn btn-primary" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+
+			<label for="upcInput">Search by UPC / barcode #</label><br>
+			<input id="upcInput" type="text" name="upcInput"/>
+			<button class="btn btn-primary" id="add-upc" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+
 			
-				<label for="productInput">Search by product</label><br>
-				<input id="productInput" type="text" name="productInput"/>
-				<button class="btn btn-primary" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
-			
-				<label for="recipeInput">Search by recipes</label><br>
-				<input id="recipeInput" type="text" name="recipeInput"/>
-				<button class="btn btn-primary" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		
+			<label for="recipeInput">Search by recipes</label><br>
+			<input id="recipeInput" type="text" name="recipeInput"/>
+			<button class="btn btn-primary" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 		</div>
-		<div class="col-md-8">
-			<div id="buttons-appear-here">THIS IS THE BAR</div><br><br>
+		<div class="col-md-9">
+		<!-- <div id="buttons-appear-here">THIS IS THE BAR</div><br><br> -->
 			<div class="panel panel-primary">
 				<div class="panel-heading">Search Results</div> 
 					<div class="panel-body">
@@ -65,18 +108,16 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>Ingredient</th>
+										<th>Product</th>
 										<!-- We can change this so it is color-based (red, yellow, green) -->
+										<!-- <th>UPC</th> -->
 										<th>Allergen status <br>(0 = none, 1 = may contain, 2 = contains)</th>
 									</tr>
 								</thead>
 								<tbody id="new-input">
 									<tr> 
 										<td>i.e. Peanuts</td>
-										<td>2</td>
-									</tr>
-									<tr> 
-										<td>i.e. High fructose corn syrup</td>
+										<td>0123456789012</td>
 										<td>2</td>
 									</tr>
 								</tbody>
@@ -86,6 +127,60 @@
 				</div>
 			</div>
 		</div>
+	<br>
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<div id="new-UPCinput"></div>
+					<div>
+						<img class="allergen-icons displayOff" value="Cereals" src="assets/images/cereals.png"/>
+					</div>
+					<div >
+						<img class="allergen-icons displayOff" value="Shellfish" src="assets/images/shellfish.png"/>
+					</div>
+					<div >
+						<img class="allergen-icons displayOff" value="Egg" src="assets/images/egg.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Fish" src="assets/images/fish.png"/>
+					</div>
+					<div >
+						<img class="allergen-icons displayOff" value="Milk" src="assets/images/milk.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Peanuts" src="assets/images/peanuts.png"/>
+					</div>
+					<div >
+						<img class="allergen-icons displayOff" value="Sulfite" src="assets/images/sulfite.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Tree Nuts" src="assets/images/tree-nuts.png"/>
+					</div>
+					<div >
+						<img class="allergen-icons displayOff" value="Soybean" src="assets/images/soybean.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Sesame Seeds" src="assets/images/sesame-seeds.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Gluten" src="assets/images/gluten.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Lactose" src="assets/images/lactose.png"/>
+					</div>
+					<div >
+						<img class="allergen-icons displayOff" value="Corn" src="assets/images/corn.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Wheat" src="assets/images/wheat.png"/>
+					</div>
+					<div>
+						<img class="allergen-icons displayOff" value="Coconut" src="assets/images/coconut.png"/>
+					</div>
+			</div>
+		</div>
+		
+	</div>
 
 	</div>
 	<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>

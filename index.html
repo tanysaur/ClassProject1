@@ -83,7 +83,7 @@
 			
 			<label for="ingredientInput">Search by ingredients</label><br>
 			<input id="ingredientInput" type="text" name="ingredientInput">
-			<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+			<button class="btn btn-primary" id="add-ingredient" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
 		
 			<label for="productInput">Search by product</label><br>
 			<input id="productInput" type="text" name="productInput"/>
@@ -117,7 +117,6 @@
 								<tbody id="new-input">
 									<tr> 
 										<td>i.e. Peanuts</td>
-										<td>0123456789012</td>
 										<td>2</td>
 									</tr>
 								</tbody>
@@ -130,56 +129,69 @@
 	<br>
 	<div class="container">
 		<div class="panel panel-primary">
+			<div class="panel-heading">
+				This product: <span id="thisProduct"> </span> contains the following allergens...
+			</div>
 			<div class="panel-body">
 				<div id="new-UPCinput"></div>
 					<div>
-						<img class="allergen-icons displayOff" value="Cereals" src="assets/images/cereals.png"/>
+						<img id="CerealsIcon" class="allergen-icons displayOff" data-allergenName="Cereals" src="assets/images/cereals.png"/>
 					</div>
 					<div >
-						<img class="allergen-icons displayOff" value="Shellfish" src="assets/images/shellfish.png"/>
+						<img id="ShellfishIcon" class="allergen-icons displayOff" data-allergenName="Shellfish" src="assets/images/shellfish.png"/>
 					</div>
 					<div >
-						<img class="allergen-icons displayOff" value="Egg" src="assets/images/egg.png"/>
+						<img id="EggIcon" class="allergen-icons displayOff" data-allergenName="Egg" src="assets/images/egg.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Fish" src="assets/images/fish.png"/>
+						<img id="FishIcon" class="allergen-icons displayOff" data-allergenName="Fish" src="assets/images/fish.png"/>
 					</div>
 					<div >
-						<img class="allergen-icons displayOff" value="Milk" src="assets/images/milk.png"/>
+						<img id="MilkIcon" class="allergen-icons displayOff" data-allergenName="Milk" src="assets/images/milk.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Peanuts" src="assets/images/peanuts.png"/>
+						<img id="PeanutsIcon" class="allergen-icons displayOff" data-allergenName="Peanuts" src="assets/images/peanuts.png"/>
 					</div>
 					<div >
-						<img class="allergen-icons displayOff" value="Sulfite" src="assets/images/sulfite.png"/>
+						<img id="SulfiteIcon" class="allergen-icons displayOff" data-allergenName="Sulfite" src="assets/images/sulfite.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Tree Nuts" src="assets/images/tree-nuts.png"/>
+						<img id="Tree NutsIcon" class="allergen-icons displayOff" data-allergenName="Tree Nuts" src="assets/images/tree-nuts.png"/>
 					</div>
 					<div >
-						<img class="allergen-icons displayOff" value="Soybean" src="assets/images/soybean.png"/>
+						<img id="SoybeanIcon" class="allergen-icons displayOff" data-allergenName="Soybean" src="assets/images/soybean.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Sesame Seeds" src="assets/images/sesame-seeds.png"/>
+						<img id="Sesame SeedsIcon" class="allergen-icons displayOff" data-allergenName="Sesame Seeds" src="assets/images/sesame-seeds.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Gluten" src="assets/images/gluten.png"/>
+						<img id="GlutenIcon" class="allergen-icons displayOff" data-allergenName="Gluten" src="assets/images/gluten.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Lactose" src="assets/images/lactose.png"/>
+						<img id="LactoseIcon" class="allergen-icons displayOff" data-allergenName="Lactose" src="assets/images/lactose.png"/>
 					</div>
 					<div >
-						<img class="allergen-icons displayOff" value="Corn" src="assets/images/corn.png"/>
+						<img id="CornIcon" class="allergen-icons displayOff" data-allergenName="Corn" src="assets/images/corn.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Wheat" src="assets/images/wheat.png"/>
+						<img id="WheatIcon" class="allergen-icons displayOff" data-allergenName="Wheat" src="assets/images/wheat.png"/>
 					</div>
 					<div>
-						<img class="allergen-icons displayOff" value="Coconut" src="assets/images/coconut.png"/>
+						<img id="CoconutIcon" class="allergen-icons displayOff" data-allergenName="Coconut" src="assets/images/coconut.png"/>
 					</div>
 			</div>
 		</div>
 		
+	</div>
+
+	<div class="container">
+		<div class="panel panel-success">
+			<div  class="panel-heading">Related items</div>
+				<div id="relatedItems" class="panel-body text-center">
+				
+				</div>
+			
+		</div>
 	</div>
 
 	</div>

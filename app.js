@@ -20,35 +20,6 @@
   var labelURL = ''; 
   var sid = '';
 
-  //Click event for searching ingredients
-  $(document).on("click", "#add-ingredient", function() {
-    searchInput = $("#ingredientInput").val().trim();
-    searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + "ad257332-9bf5-4866-997c-9847dbd29f07" + "&n=20&s=0&f=json&api_key=" + labelAPIkey;
-
-    // Code for handling the push
-    database.ref().push({
-      searchInput: searchInput
-    });
-
-    $("#ingredientInput").val("");
-
-    $.ajax({
-        url: searchURL,    
-        method: 'GET'
-    }).done(function(response) {
-      // searchInput = $("#productInput").val().trim();
-
-      //Displays 20 items related to the searched product
-      $("#new-input").empty();
-      for(i = 0; i < 20; i++){
-        console.log("Name: " + response.productsArray[i].product_name);
-        console.log("Description: " + response.productsArray[i].product_description);
-        console.log("UPC: " + response.productsArray[i].upc);
-        $("#new-input").append("<tr><td>" + response.productsArray[i].product_name + "</td><td>" + response.productsArray[i].upc);
-      }   
-    });
-  });
-
   //Click event for searching products
   $(document).on("click", "#add-product", function() {
     searchInput = $("#productInput").val().trim();
@@ -90,7 +61,7 @@
     }).done(function(upcresponse) {
 
       //Show results of all allergens active in the product's ingredient
-      $("#new-input").empty();
+      $("#new-UPCinput").empty();
       $("#thisProduct").empty();
       $("#thisProduct").append(upcresponse.product_name + " (" + upcInput + ")");
       for(i = 0; i < 15; i++){
@@ -152,37 +123,3 @@
   // }
 
 
-
-
-  //Render allergen buttons
-  function renderButtons(){ 
-    // Deletes the allergens prior to adding new allergens (this is necessary otherwise you will have repeat buttons)
-    $('#buttons-appear-here').empty();
-  
-    // Loops through the array of allergens
-    for (var i = 0; i < allergens.length; i++){   
-      $("#buttons-appear-here").append("<button class='allergensButton' data-button='" + allergens[i] +"'>" + allergens[i] + "</button> ");
-    }
-  };
-  
-  // ========================================================
-  // This function handles events where one button is clicked
-  $('#add-allergens').on('click', function(){
-
-    // This line of code will grab the input from the textbox
-    var newAllergen = $('#allergensInput').val().trim();
-
-    // The allergen from the textbox is then added to our array
-    allergens.push(newAllergen);
-
-    // Our array then runs which handles the processing of our allergens array
-    renderButtons();
-
-    $("#allergensInput").val("");
-
-    // We have this line so that users can hit "enter" instead of clicking on ht button and it won't move to the next page
-    return false;
-  });
-
-  // ========================================================
-  //renderButtons();

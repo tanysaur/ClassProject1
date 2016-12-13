@@ -23,8 +23,8 @@
 	<div class="container">
 		<div class="jumbotron">
 			
-			<h1><i class="fa fa-heartbeat"></i> Project Allergi</h1>
-			<h3>Some tagline here</h3>
+			<h1><i class="fa fa-heartbeat"></i> Allergi</h1>
+			<h4>Your food allergy helper</h4>
 			<!-- add image/logo here -->
 
 		</div>
@@ -82,27 +82,31 @@
 		<div class="col-md-3">
 			
 			<!-- <form> -->
-				<label for="productInput">Search by product</label><br>
-				<input id="productInput" type="text" name="productInput"/>
-				<button class="btn btn-primary" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+				<div class="form-group">
+					<label for="add-product">Search your product</label><br>
+					<input id="productInput" type="text" placeholder="Enter product name"/>
+					<button class="btn btn-default" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</div>
+				
 			<!-- </form> -->
 		
 			<!-- <form> -->
-				<label for="upcInput">Search by UPC / barcode #</label><br>
-				<input id="upcInput" type="text" name="upcInput"/>
-				<button class="btn btn-primary" id="add-upc" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+				<div class="form-group">
+					<label for="add-upc">Search by UPC/barcode #</label><br>
+					<input id="upcInput" type="text" placeholder="i.e. 0123456789012" />
+					<button class="btn btn-default" id="add-upc" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</div>				
 			<!-- </form> -->
-		
 			<!-- <form> -->
-				<label for="recipeInput">Search by recipes</label><br>
-				<input id="recipeInput" type="text" name="recipeInput"/>
-				<button class="btn btn-primary" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-			<!-- </form> -->
-			
+				<div class="form-group">
+					<label for="add-recipe">Search by recipes</label><br>
+					<input id="recipeInput" type="text" placeholder="Enter recipe" />
+					<button class="btn btn-default" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				</div>
+			<!-- </form> -->			
 		</div>
 		<div class="col-md-9">
-		<!-- <div id="buttons-appear-here">THIS IS THE BAR</div><br><br> -->
-			<div id="search-results" class="panel panel-info">
+			<div id="search-results" class="panel panel-success">
 				<div class="panel-heading">Search Results</div> 
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -117,8 +121,8 @@
 								</thead>
 								<tbody id="new-input">
 									<tr> 
-										<td>i.e. Peanuts</td>
-										<td>2</td>
+										<td>i.e. BREYERS VANILLA ICE CREAM</td>
+										<td>077567394897</td>
 									</tr>
 								</tbody>
 							</table>
@@ -130,10 +134,10 @@
 	<br>
 	<div class="container">
 		<div class="col-md-3">
-			<!-- empty space -->
+			<!-- empty space for side bar -->
 		</div>
 
-		<div class="col-md-9">
+		<div class="col-md-9 resultPanels displayOff">
 			<div class="col-md-6">
 				<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -189,7 +193,7 @@
 				</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6 resultPanels">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<span class="thisProduct"> </span>  contains the following additives...
@@ -204,8 +208,8 @@
 		
 	</div>
 
-	<div class="container">
-		<div class="panel panel-success">
+	<div class="container resultPanels displayOff">
+		<div class="panel panel-info">
 			<div  class="panel-heading">Related items</div>
 				<div id="relatedItems" class="panel-body text-center">				
 				</div>

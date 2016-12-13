@@ -81,21 +81,28 @@
 	<div class="container">
 		<div class="col-md-3">
 			
-			<label for="productInput">Search by product</label><br>
-			<input id="productInput" type="text" name="productInput"/>
-			<button class="btn btn-primary" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
-
-			<label for="upcInput">Search by UPC / barcode #</label><br>
-			<input id="upcInput" type="text" name="upcInput"/>
-			<button class="btn btn-primary" id="add-upc" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
-
-			<label for="recipeInput">Search by recipes</label><br>
-			<input id="recipeInput" type="text" name="recipeInput"/>
-			<button class="btn btn-primary" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			<!-- <form> -->
+				<label for="productInput">Search by product</label><br>
+				<input id="productInput" type="text" name="productInput"/>
+				<button class="btn btn-primary" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+			<!-- </form> -->
+		
+			<!-- <form> -->
+				<label for="upcInput">Search by UPC / barcode #</label><br>
+				<input id="upcInput" type="text" name="upcInput"/>
+				<button class="btn btn-primary" id="add-upc" type="submit"><i class="glyphicon glyphicon-search"></i></button><br>
+			<!-- </form> -->
+		
+			<!-- <form> -->
+				<label for="recipeInput">Search by recipes</label><br>
+				<input id="recipeInput" type="text" name="recipeInput"/>
+				<button class="btn btn-primary" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			<!-- </form> -->
+			
 		</div>
 		<div class="col-md-9">
 		<!-- <div id="buttons-appear-here">THIS IS THE BAR</div><br><br> -->
-			<div class="panel panel-primary">
+			<div id="search-results" class="panel panel-info">
 				<div class="panel-heading">Search Results</div> 
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -105,7 +112,7 @@
 										<th>Product</th>
 										<!-- We can change this so it is color-based (red, yellow, green) -->
 										<!-- <th>UPC</th> -->
-										<th>Allergen status <br>(0 = none, 1 = may contain, 2 = contains)</th>
+										<th>UPC</th>
 									</tr>
 								</thead>
 								<tbody id="new-input">
@@ -122,12 +129,18 @@
 		</div>
 	<br>
 	<div class="container">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				This product: <span id="thisProduct"> </span> contains the following allergens...
-			</div>
-			<div class="panel-body">
-				<div id="new-UPCinput"></div>
+		<div class="col-md-3">
+			<!-- empty space -->
+		</div>
+
+		<div class="col-md-9">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span class="thisProduct"> </span> contains the following allergens...
+				</div>
+				<div class="panel-body">
+					<div id="new-UPCInput-Allergen"></div>
 					<div>
 						<img id="CerealsIcon" class="allergen-icons displayOff" data-allergenName="Cereals" src="assets/images/cereals.png"/>
 					</div>
@@ -173,7 +186,20 @@
 					<div>
 						<img id="CoconutIcon" class="allergen-icons displayOff" data-allergenName="Coconut" src="assets/images/coconut.png"/>
 					</div>
+				</div>
+				</div>
 			</div>
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<span class="thisProduct"> </span>  contains the following additives...
+					</div>
+					<div class="panel-body">
+						<div id="new-UPCInput-Additive"></div>
+						
+					</div>
+				</div>	
+			</div>			
 		</div>
 		
 	</div>
@@ -181,11 +207,15 @@
 	<div class="container">
 		<div class="panel panel-success">
 			<div  class="panel-heading">Related items</div>
-				<div id="relatedItems" class="panel-body text-center">
-				
+				<div id="relatedItems" class="panel-body text-center">				
 				</div>
-			
 		</div>
+	</div>
+
+	<footer class="footer-copyright blue lighten-1 row center">
+  		<div class="container text-center">&copy; 2016 Project Allergi Team</div>
+	</footer>
+		
 	</div>
 
 	</div>

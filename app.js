@@ -20,10 +20,20 @@
   var labelURL = ''; 
   var sid = '';
 
+  //Step 1: add your allergen
+
+
+  //Toggles button
+  $(".allergen-icons-button").on("click", function(){
+      $(this).toggleClass('selected');
+  })
+
   //Click event for searching products
-  $(document).on("click", "#add-product", function() {
+  $(document).on("click", "#add-product", function() { // ---scrollTo
     searchInput = $("#productInput").val().trim();
     searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + "ad257332-9bf5-4866-997c-9847dbd29f07" + "&n=20&s=0&f=json&api_key=" + labelAPIkey;
+
+    //Function that calls allergens selected
 
     // Code for handling the push
     database.ref().push({
@@ -49,7 +59,11 @@
   // Click event when searching by UPC
   $(document).on("click", "#add-upc", function(){
     upcInput = $("#upcInput").val().trim();
+    // $("#search-results").addClass("displayOff");
     upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upcInput + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
+    
+    //Function that calls allergens selected
+
     database.ref().push({
       upcInput: upcInput
     });
@@ -61,13 +75,14 @@
     }).done(function(upcresponse) {
 
       //Show results of all allergens active in the product's ingredient
-      $("#new-UPCinput").empty();
-      $("#thisProduct").empty();
-      $("#thisProduct").append(upcresponse.product_name + " (" + upcInput + ")");
+      $("#new-UPCInput-Allergen").empty();
+      $("#new-UPCInput-Additive").empty();
+      $(".thisProduct").empty();
+      $(".thisProduct").append(upcresponse.product_name + " (" + upcInput + ")");
       for(i = 0; i < 15; i++){
         if (upcresponse.allergens[i].allergen_value >= 1){
-          $("#new-UPCinput").append(
-          "<div class='col-md-12'><strong>" + upcresponse.allergens[i].allergen_name + "</strong><br>"  + "Allergen value: "
+          $("#new-UPCInput-Allergen").append(
+          "<div><strong>" + upcresponse.allergens[i].allergen_name + "</strong><br>"  + "Allergen value: "
           + upcresponse.allergens[i].allergen_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.allergens[i].allergen_red_ingredients  
           + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.allergens[i].allergen_yellow_ingredients + "<br><br>");
          
@@ -77,7 +92,18 @@
           //   $("#" + upcresponse.allergens[i].allergen_name + "Icon").removeClass("displayOff");
           // }
         }
-      } 
+
+      }
+
+      for(i = 0; i <21; i++){
+        if (upcresponse.additives[i].additive_value >= 1){
+          $("#new-UPCInput-Additive").append(
+          "<div><strong>" + upcresponse.additives[i].additive_name + "</strong><br>"  + "Additive value: "
+          + upcresponse.additives[i].additive_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.additives[i].additive_red_ingredients  
+          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.additives[i].additive_yellow_ingredients + "<br><br>");
+        }
+      }
+
       relatedItems(upcresponse.product_name);
     })
 
@@ -101,6 +127,7 @@
       }
     })
   }
+
 
   //Displays allegen value, red and yellow of a UPC
   // // function displayResults(x){

@@ -9,7 +9,7 @@
 	border: 1px solid red;
 }
 
-.allergen-icons-button:hover {
+.allergen-icons-button.selected {
 	background-color: #e00;
 }
 

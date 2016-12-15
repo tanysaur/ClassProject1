@@ -2,6 +2,10 @@ body {
 	font-family: "Helvetica Neue";
 }
 
+#upcInput {
+	width: 100%;
+	height
+}
 .jumbotron h1 {
 	color: #e00;
 }

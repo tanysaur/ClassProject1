@@ -20,11 +20,11 @@
 	
 </head>
 <body>
-	<div class="container">
+	<div class="container text-center">
 		<div class="jumbotron">
 			
-			<h1><i class="fa fa-heartbeat"></i> Allergi</h1>
-			<h4>Your food allergy helper</h4>
+			<h1><i class="fa fa-heartbeat"></i> Lergik</h1>
+			<h4>- Your food allergy helper -</h4>
 			<!-- add image/logo here -->
 
 		</div>
@@ -78,34 +78,30 @@
 		</button>
 	</div><br><br>
 
+	<div class="row">
 	<div class="container">
-		<div class="col-md-3">
-			
-			<!-- <form> -->
-				<div class="form-group">
-					<label for="add-product">Search your product</label><br>
-					<input id="productInput" type="text" placeholder="Enter product name"/>
-					<button class="btn btn-default" id="add-product" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-				
-			<!-- </form> -->
+		<div class="col-lg-12">
+	    <div class="input-group">
+	      <input id="productInput" type="text" class="form-control" placeholder="Enter product name / UPC / barcode #">
+	      <span class="input-group-btn">
+	        <button class="btn btn-primary" id="add-product" type="button"><i class="glyphicon glyphicon-search"></i></button>
+	      </span>
+	    </div><!-- /input-group -->
+	  </div><!-- /.col-lg-6 --> <br>
+
+		<div class="col-lg-12">
+	    <div class="input-group">
+	      <input id="upcInput" type="text" class="form-control" placeholder="Enter product name / UPC / barcode #">
+	      <span class="input-group-btn">
+	        <button class="btn btn-primary" id="add-upc" type="button"><i class="glyphicon glyphicon-search"></i></button>
+	      </span>
+	    </div><!-- /input-group -->
+	  </div><!-- /.col-lg-6 -->
+	</div> <br>
+
+	<div class="container">		
 		
-			<!-- <form> -->
-				<div class="form-group">
-					<label for="add-upc">Search by UPC/barcode #</label><br>
-					<input id="upcInput" type="text" placeholder="i.e. 0123456789012" />
-					<button class="btn btn-default" id="add-upc" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>				
-			<!-- </form> -->
-			<!-- <form> -->
-				<div class="form-group">
-					<label for="add-recipe">Search by recipes</label><br>
-					<input id="recipeInput" type="text" placeholder="Enter recipe" />
-					<button class="btn btn-default" id="add-recipe" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-				</div>
-			<!-- </form> -->			
-		</div>
-		<div class="col-md-9">
+		<div class="row">
 			<div id="search-results" class="panel panel-success">
 				<div class="panel-heading">Search Results</div> 
 					<div class="panel-body">
@@ -132,80 +128,34 @@
 			</div>
 		</div>
 	<br>
-	<div class="container">
-		<div class="col-md-3">
-			<!-- empty space for side bar -->
+	<div class="container resultPanels displayOff">
+	<div>
+		<h2 class="thisProduct"> </h2>
+	</div>
+	
+		<div class="col-lg-6">
+			<div class="panel panel-primary">
+			<div class="panel-heading">
+				Allergens
+			</div><br>
+			<div class="panel-body">
+				<span class="thisProduct"> </span> 
+				<div id="new-UPCInput-Allergen"></div>
+			</div>
 		</div>
+		</div>
+		<div class="col-lg-6">
 
-		<div class="col-md-9 resultPanels displayOff">
-			<div class="col-md-6">
-				<div class="panel panel-primary">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<span class="thisProduct"> </span> contains the following allergens...
+					Additives
 				</div>
 				<div class="panel-body">
-					<div id="new-UPCInput-Allergen"></div>
-					<div>
-						<img id="CerealsIcon" class="allergen-icons displayOff" data-allergenName="Cereals" src="assets/images/cereals.png"/>
-					</div>
-					<div >
-						<img id="ShellfishIcon" class="allergen-icons displayOff" data-allergenName="Shellfish" src="assets/images/shellfish.png"/>
-					</div>
-					<div >
-						<img id="EggIcon" class="allergen-icons displayOff" data-allergenName="Egg" src="assets/images/egg.png"/>
-					</div>
-					<div>
-						<img id="FishIcon" class="allergen-icons displayOff" data-allergenName="Fish" src="assets/images/fish.png"/>
-					</div>
-					<div >
-						<img id="MilkIcon" class="allergen-icons displayOff" data-allergenName="Milk" src="assets/images/milk.png"/>
-					</div>
-					<div>
-						<img id="PeanutsIcon" class="allergen-icons displayOff" data-allergenName="Peanuts" src="assets/images/peanuts.png"/>
-					</div>
-					<div >
-						<img id="SulfiteIcon" class="allergen-icons displayOff" data-allergenName="Sulfite" src="assets/images/sulfite.png"/>
-					</div>
-					<div>
-						<img id="Tree NutsIcon" class="allergen-icons displayOff" data-allergenName="Tree Nuts" src="assets/images/tree-nuts.png"/>
-					</div>
-					<div >
-						<img id="SoybeanIcon" class="allergen-icons displayOff" data-allergenName="Soybean" src="assets/images/soybean.png"/>
-					</div>
-					<div>
-						<img id="Sesame SeedsIcon" class="allergen-icons displayOff" data-allergenName="Sesame Seeds" src="assets/images/sesame-seeds.png"/>
-					</div>
-					<div>
-						<img id="GlutenIcon" class="allergen-icons displayOff" data-allergenName="Gluten" src="assets/images/gluten.png"/>
-					</div>
-					<div>
-						<img id="LactoseIcon" class="allergen-icons displayOff" data-allergenName="Lactose" src="assets/images/lactose.png"/>
-					</div>
-					<div >
-						<img id="CornIcon" class="allergen-icons displayOff" data-allergenName="Corn" src="assets/images/corn.png"/>
-					</div>
-					<div>
-						<img id="WheatIcon" class="allergen-icons displayOff" data-allergenName="Wheat" src="assets/images/wheat.png"/>
-					</div>
-					<div>
-						<img id="CoconutIcon" class="allergen-icons displayOff" data-allergenName="Coconut" src="assets/images/coconut.png"/>
-					</div>
+					
+					<div id="new-UPCInput-Additive"></div>
 				</div>
-				</div>
-			</div>
-			<div class="col-md-6 resultPanels">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<span class="thisProduct"> </span>  contains the following additives...
-					</div>
-					<div class="panel-body">
-						<div id="new-UPCInput-Additive"></div>
-						
-					</div>
-				</div>	
-			</div>			
-		</div>
-		
+			</div>		
+		</div>	
 	</div>
 
 	<div class="container resultPanels displayOff">

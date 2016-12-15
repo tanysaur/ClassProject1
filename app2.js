@@ -1,3 +1,20 @@
+                                                    ///////////////////////////////////////////////////////
+$(window).on("orientationchange",function(){
+      //alert("The orientation has changed!");
+      if(window.orientation == 0) // Portrait
+      {
+      $("p").css({"background-color":"yellow"});
+      //$("p").css({"background-color":"yellow","font-size":"300%"});
+      }
+      else // Landscape
+      {
+      $("p").css({"background-color":"pink"});
+        //$("p").css({"background-color":"pink","font-size":"50%"});
+      }
+  });
+ ///////////////////////////////////////////////////////
+
+
 //Initialize Firebase
   var config = {
     apiKey: "AIzaSyD5XYZHecNShIOC9c69lKZgIVPYyHyysF8",
@@ -17,6 +34,8 @@
   var upc = [];
   var labelURL = ''; 
   var sid = '';
+  var qtytoggles = 15;                              ///////////////////////////////////////////////////////
+  var selectedToggle = [];                          ///////////////////////////////////////////////////////
 
   window.onload = function(){
     var sessionURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
@@ -34,29 +53,74 @@
     })
   }
 
+  function getAllergens(upc) {
+    upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upc + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
+    
+     $.ajax({
+        url: upcURL,
+        method: 'GET'
+    }).done(function(upcresponse) {
+      console.log(upcresponse);
+      $(".thisProduct").append(upcresponse.product_name + " (" + upcInput + ")");
+      for(i = 0; i < 15; i++){
+        if (upcresponse.allergens[i].allergen_value >= 1){
+          $("#new-UPCInput-Allergen").append(
+          "<div><strong>" + upcresponse.allergens[i].allergen_name + "</strong><br>"  + "Allergen value: "
+          + upcresponse.allergens[i].allergen_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.allergens[i].allergen_red_ingredients  
+          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.allergens[i].allergen_yellow_ingredients + "<br><br>");
+         
+          //Display allergen icon
+          //If allergen name is in the list, compare the tag with the allergene name, if same, remove displayOff class        
+          // if (upcresponse.allergens[i].allergen_name == data-allergenName) {
+          //   $("#" + upcresponse.allergens[i].allergen_name + "Icon").removeClass("displayOff");
+          // }
+        }
+      }
+
+      for(i = 0; i <21; i++){
+        if (upcresponse.additives[i].additive_value >= 1){
+          $("#new-UPCInput-Additive").append(
+          "<div><strong>" + upcresponse.additives[i].additive_name + "</strong><br>"  + "Additive value: "
+          + upcresponse.additives[i].additive_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.additives[i].additive_red_ingredients  
+          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.additives[i].additive_yellow_ingredients + "<br><br>");
+        }
+      }
+
+      //Scroll to results panel
+      $('html, body').animate({
+          scrollTop: $("#new-UPCInput-Allergen").offset().top
+      }, 1500);
+
+      relatedItems(upcresponse.product_name);
+    });
+  }
+
+  function getQueryVariable(variable)
+  {
+     var query = window.location.search.substring(1);
+     var vars = query.split("&");
+     for (var i=0;i<vars.length;i++) {
+             var pair = vars[i].split("=");
+             if(pair[0] == variable){return pair[1];}
+     }
+     return(false);
+  }
+
+  $( document ).ready(function() {
+      if(getQueryVariable('upc') != false) {
+        getAllergens(getQueryVariable('upc'));
+      }
+  });
+
   //Step 1: add your allergen
 
 
-  function getQueryVariable(variable){
-       var query = window.location.search.substring(1);
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return pair[1];}
-       }
-       return(false);
-  }
-
-  $(document).ready(function() {
-    if(getQueryVariable('upc') != false) {
-      console.log(getQueryVariable('upc'));
-    }
-  });
-
-
   //Toggles button
+  var toggleDiv = $("<div>");
+
   $(".allergen-icons-button").on("click", function(){
       $(this).toggleClass('selected');
+      toggleDiv.append(selectedToggle[0]);              ///////////////////////////////////////////////////////
   })
 
   //Click event for searching products
@@ -80,10 +144,12 @@
         url: searchURL,    
         method: 'GET'
     }).done(function(response) {
-      //Displays 100 items related to the searched product
+      //Displays 100 items related to the searched product  ///////////////////////////////////////////
       $("#new-input").empty();
       for(i = 0; i < 100; i++){
-        $("#new-input").append("<tr><td>" + response.productsArray[i].product_name + "</td><td>" + response.productsArray[i].upc);
+        // $("#new-input").append("<tr><td>" + response.productsArray[i].product_name + "</td><td>" + response.productsArray[i].upc + "</td><td>" + selectedToggle[0]);
+        var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
+        $("#new-input").append("<tr><td><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td><td></td><td>");
       }   
     });
   });

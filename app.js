@@ -24,26 +24,7 @@ $(window).on("orientationchange",function(){
   var labelAPIkey = "x49rczhgarkyz7hzpxsez2nn";
   var walmartAPIkey = "2ahdxqdhzd7thd5u846wgf2m";
   var searchInput = '';
-  var upc = [];
   var labelURL = ''; 
-  var sid = '';
-
-  window.onload = function(){
-    var sessionURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
-    location.replace("https://tanysaur.github.io/Lergix");
-    $.ajax({
-      url: sessionURL,
-      method: 'GET'
-    }).done(function(session) {
-      
-      sid = session.session_id;
-      console.log("SID: " +sid);
-
-      database.ref().push({
-        sessionID: sid
-      })
-    })
-  }
 
   function getQueryVariable(variable){
        var query = window.location.search.substring(1);
@@ -58,22 +39,16 @@ $(window).on("orientationchange",function(){
   function getAllergens(upc) {
     upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upc + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
 
-    database.ref().push({
-      upcInput: upc
-    });
-
      $.ajax({
         url: upcURL,
         method: 'GET'
     }).done(function(upcresponse) {
+      //Show results of all allergens active in the product's ingredient
+      $(".resultPanels").removeClass("displayOff");
+      $("#new-UPCInput-Allergen").empty();
+      $("#new-UPCInput-Additive").empty();
 
-    //Show results of all allergens active in the product's ingredient
-    
-    $(".resultPanels").removeClass("displayOff");
-    $("#new-UPCInput-Allergen").empty();
-    $("#new-UPCInput-Additive").empty();
-
-    $(".thisProduct").empty();
+      $(".thisProduct").empty();
 
       //Show product name as title of results panel div
       $(".thisProduct").append(upcresponse.product_name + " (" + upc + ")");
@@ -103,6 +78,10 @@ $(window).on("orientationchange",function(){
       }, 1500);
 
       relatedItems(upcresponse.product_name);
+
+      database.ref().push({
+        upcInput: upc
+      });
     });
   }
   
@@ -115,24 +94,13 @@ $(window).on("orientationchange",function(){
     $("#search-results").addClass("displayOff");
   });
 
-  // // Click event when searching by UPC
-  // $(document).on("click", ".productLink", function(){
-  //   getAllergens(getQueryVariable('upc'));
-  //   //upcInput = $("#upcInput").val().trim();
-  // });
-
-  // //Toggles button
-  // $(".allergen-icons-button").on("click", function(){
-  //     $(this).toggleClass('selected');
-  // })
-
   //Click event for searching products
   $(document).on("click", "#add-product", function() { 
+    $(".resultPanels").addClass("displayOff");
     $("#search-results").removeClass("displayOff");
-    $("#new-UPCInput-Allergen").addClass("displayOff");
-    $("#resultPanels").addClass("displayOff");
+    
     searchInput = $("#productInput").val().trim();
-    searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + sid + "&n=100&s=0&f=json&api_key=" + labelAPIkey;
+    searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&n=100&s=0&f=json&api_key=" + labelAPIkey;
 
     // Code for handling the push
     database.ref().push({
@@ -155,7 +123,6 @@ $(window).on("orientationchange",function(){
   });
 
   
-
   //Call related items from Walmart API
   function relatedItems(data){
     $.ajax({
@@ -175,5 +142,32 @@ $(window).on("orientationchange",function(){
     })
   }
 
+  // // Click event when searching by UPC
+  // $(document).on("click", ".productLink", function(){
+  //   getAllergens(getQueryVariable('upc'));
+  //   //upcInput = $("#upcInput").val().trim();
+  // });
 
+  // //Toggles button
+  // $(".allergen-icons-button").on("click", function(){
+  //     $(this).toggleClass('selected');
+  // })
 
+  // window.onload = function(){   
+  //   var sessionURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
+  //   $.ajax({
+  //     url: sessionURL,
+  //     method: 'GET'
+  //   }).done(function(session) {
+      
+  //     sid = session.session_id;
+  //     console.log("SID: " +sid);
+
+  //     database.ref().push({
+  //       sessionID: sid
+  //     })
+  //   })
+  // }
+
+//Reference(s):
+//CSS Tricks - getQueryVariable function

@@ -1,6 +1,6 @@
 body {
 	font-family: 'Cutive Mono', monospace, "Helvetica";
-	font-size: 14px;
+	font-size: 18px;
 }
 
 #upcInput {
@@ -8,13 +8,21 @@ body {
 	height: auto;
 }
 
+.jumbotron{
+	background-image: url("assets/images/diff-allergens.jpg");
+	background-position: top;
+	background-size: cover;
+}
+
 .jumbotron h1 {
 	font-family: 'Permanent Marker', cursive;
 	color: #e00;
+	/*font-size: 100px;*/
 }
 
 .jumbotron h4{
 	font-family: 'Pacifico', cursive;
+	color: black;
 }
 
 .allergen-icons {
@@ -69,3 +77,6 @@ body {
 	padding: 5px;
 	border-radius: 5px;
 }
+
+/*Reference(s):
+Jumbotron image - https://utahfoodallergy.files.wordpress.com/2014/04/food-allergy-graphic-11162.jpg?w=980&h=200&crop=1*/

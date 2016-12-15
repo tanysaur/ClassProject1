@@ -44,12 +44,21 @@ $(window).on("orientationchange",function(){
     })
   }
 
+  function getQueryVariable(variable){
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+         var pair = vars[i].split("=");
+         if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+  }
+
   function getAllergens(upc) {
     upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upc + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
-    
 
     database.ref().push({
-      upcInput: upcInput
+      upcInput: upc
     });
 
      $.ajax({
@@ -95,23 +104,22 @@ $(window).on("orientationchange",function(){
       relatedItems(upcresponse.product_name);
     });
   }
-
-  function getQueryVariable(variable){
-       var query = window.location.search.substring(1);
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return pair[1];}
-       }
-       return(false);
-  }
+  
 
   $(document).ready(function() {
+
     if(getQueryVariable('upc') != false) {
-      console.log(getQueryVariable('upc'));
+      //console.log(getQueryVariable('upc'));
+      getAllergens(getQueryVariable('upc'));
     }
+    $("#search-results").addClass("displayOff");
   });
 
+  // Click event when searching by UPC
+  $(document).on("click", ".productLink", function(){
+    getAllergens(getQueryVariable('upc'));
+    //upcInput = $("#upcInput").val().trim();
+  });
 
   //Toggles button
   $(".allergen-icons-button").on("click", function(){
@@ -119,7 +127,8 @@ $(window).on("orientationchange",function(){
   })
 
   //Click event for searching products
-  $(document).on("click", "#add-product", function() { // ---scrollTo
+  $(document).on("click", "#add-product", function() { 
+    $("#search-results").removeClass("displayOff");
     searchInput = $("#productInput").val().trim();
     searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + sid + "&n=100&s=0&f=json&api_key=" + labelAPIkey;
 
@@ -143,11 +152,7 @@ $(window).on("orientationchange",function(){
     });
   });
 
-  // Click event when searching by UPC
-  $(document).on("click", "#add-upc", ".productLink", function(){
-    getAllergens(getQueryVariable('upc'));
-    //upcInput = $("#upcInput").val().trim();
-  });
+  
 
   //Call related items from Walmart API
   function relatedItems(data){

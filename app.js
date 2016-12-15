@@ -30,6 +30,7 @@ $(window).on("orientationchange",function(){
 
   window.onload = function(){
     var sessionURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
+    location.replace("https://tanysaur.github.io/Lergix");
     $.ajax({
       url: sessionURL,
       method: 'GET'
@@ -107,7 +108,6 @@ $(window).on("orientationchange",function(){
   
 
   $(document).ready(function() {
-
     if(getQueryVariable('upc') != false) {
       //console.log(getQueryVariable('upc'));
       getAllergens(getQueryVariable('upc'));
@@ -115,20 +115,22 @@ $(window).on("orientationchange",function(){
     $("#search-results").addClass("displayOff");
   });
 
-  // Click event when searching by UPC
-  $(document).on("click", ".productLink", function(){
-    getAllergens(getQueryVariable('upc'));
-    //upcInput = $("#upcInput").val().trim();
-  });
+  // // Click event when searching by UPC
+  // $(document).on("click", ".productLink", function(){
+  //   getAllergens(getQueryVariable('upc'));
+  //   //upcInput = $("#upcInput").val().trim();
+  // });
 
-  //Toggles button
-  $(".allergen-icons-button").on("click", function(){
-      $(this).toggleClass('selected');
-  })
+  // //Toggles button
+  // $(".allergen-icons-button").on("click", function(){
+  //     $(this).toggleClass('selected');
+  // })
 
   //Click event for searching products
   $(document).on("click", "#add-product", function() { 
     $("#search-results").removeClass("displayOff");
+    $("#new-UPCInput-Allergen").addClass("displayOff");
+    $("#resultPanels").addClass("displayOff");
     searchInput = $("#productInput").val().trim();
     searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + sid + "&n=100&s=0&f=json&api_key=" + labelAPIkey;
 

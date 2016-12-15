@@ -13,6 +13,9 @@
 	<!-- Font Awesome CSS Icons (For cool glyphicons) -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+	<!-- Google Font Icons -->
+	<link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Pacifico|Permanent+Marker" rel="stylesheet">
+
 	<link rel="stylesheet" type="text/css" href="style.css">
 	
 	<!-- jQuery -->
@@ -22,15 +25,12 @@
 <body>
 	<div class="container text-center">
 		<div class="jumbotron">
-			
-			<h1><i class="fa fa-heartbeat"></i> Lergik</h1>
+			<h1><i class="fa fa-heartbeat"></i> <br>Lergix</h1>
 			<h4>- Your food allergy helper -</h4>
-			<!-- add image/logo here -->
-
 		</div>
 	</div>
 	
-	<div class="container allergen-icons-buttons-div text-center" id="buttons-appear-here">
+	<!-- <div class="container allergen-icons-buttons-div text-center" id="buttons-appear-here">
 		<button class="allergen-icons-button">
 			<img class="allergen-icons" alt="cereals" src="assets/images/cereals.png"/>
 		</button>
@@ -76,31 +76,30 @@
 		<button class="allergen-icons-button">
 			<img class="allergen-icons" alt="cereals" src="assets/images/coconut.png"/>
 		</button>
-	</div><br><br>
+	</div><br><br> -->
 
 	<div class="row">
-	<div class="container">
-		<div class="col-lg-12">
-	    <div class="input-group">
-	      <input id="productInput" type="text" class="form-control" placeholder="Enter product name / UPC / barcode #">
-	      <span class="input-group-btn">
-	        <button class="btn btn-primary" id="add-product" type="button"><i class="glyphicon glyphicon-search"></i></button>
-	      </span>
-	    </div><!-- /input-group -->
-	  </div><!-- /.col-lg-6 --> <br>
+		<div class="container">
+			<div class="col-lg-12">
+		    <div class="input-group">
+		    	<input id="productInput" type="text" class="form-control" placeholder="Enter product name | UPC | barcode #">
+		      	<span class="input-group-btn">
+			        <button class="btn btn-primary" id="add-product" type="button"><i class="glyphicon glyphicon-search"></i></button>
+		      	</span>
+		    </div><!-- /input-group -->
+		 </div><!-- /.col-lg-6 --> <br><br>
 
 		<div class="col-lg-12">
-	    <div class="input-group">
-	      <input id="upcInput" type="text" class="form-control" placeholder="Enter product name / UPC / barcode #">
-	      <span class="input-group-btn">
-	        <button class="btn btn-primary" id="add-upc" type="button"><i class="glyphicon glyphicon-search"></i></button>
-	      </span>
-	    </div><!-- /input-group -->
-	  </div><!-- /.col-lg-6 -->
+		    <div class="input-group">
+		      	<input id="upcInput" type="text" class="form-control" placeholder="Enter UPC | barcode #">
+		      	<span class="input-group-btn">
+		       		 <button class="btn btn-primary" id="add-upc" type="button"><i class="glyphicon glyphicon-search"></i></button>
+		     	 </span>
+		    </div><!-- /input-group -->
+		</div><!-- /.col-lg-6 -->
 	</div> <br>
 
-	<div class="container">		
-		
+	<div class="container">			
 		<div class="row">
 			<div id="search-results" class="panel panel-success">
 				<div class="panel-heading">Search Results</div> 
@@ -110,8 +109,7 @@
 								<thead>
 									<tr>
 										<th>Product</th>
-										<!-- We can change this so it is color-based (red, yellow, green) -->
-										<!-- <th>UPC</th> -->
+										
 										<th>UPC</th>
 									</tr>
 								</thead>
@@ -127,47 +125,39 @@
 				</div>
 			</div>
 		</div>
-	<br>
-	<div class="container resultPanels displayOff">
-	<div>
-		<h2 class="thisProduct"> </h2>
-	</div>
+		<br>
+		<div class="container resultPanels displayOff">
+			<div><h2 class="thisProduct"></h2>
+		</div>
 	
 		<div class="col-lg-6">
 			<div class="panel panel-primary">
-			<div class="panel-heading">
-				Allergens
-			</div><br>
-			<div class="panel-body">
-				<span class="thisProduct"> </span> 
-				<div id="new-UPCInput-Allergen"></div>
+				<div class="panel-heading">Allergens</div><br>
+					<div class="panel-body">
+						<div id="new-UPCInput-Allergen">	
+					</div>
+				</div>
 			</div>
 		</div>
-		</div>
 		<div class="col-lg-6">
-
 			<div class="panel panel-primary">
-				<div class="panel-heading">
-					Additives
-				</div>
-				<div class="panel-body">
-					
-					<div id="new-UPCInput-Additive"></div>
-				</div>
-			</div>		
-		</div>	
-	</div>
-
-	<div class="container resultPanels displayOff">
-		<div class="panel panel-info">
-			<div  class="panel-heading">Related items</div>
-				<div id="relatedItems" class="panel-body text-center">				
-				</div>
+				<div class="panel-heading">Additives</div><br>
+					<div class="panel-body">
+						<div id="new-UPCInput-Additive"></div>
+					</div>
+				</div>		
+			</div>	
 		</div>
-	</div>
+
+		<div class="container resultPanels displayOff">
+			<div class="panel panel-info">
+				<div  class="panel-heading">Related items</div>
+					<div id="relatedItems" class="panel-body text-center"></div>
+			</div>
+		</div>
 
 	<footer class="footer-copyright blue lighten-1 row center">
-  		<div class="container text-center">&copy; 2016 Project Allergi Team</div>
+  		<div class="container text-center">&copy; 2016 Lergix Team</div>
 	</footer>
 		
 	</div>

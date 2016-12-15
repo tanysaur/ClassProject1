@@ -147,6 +147,7 @@ $(window).on("orientationchange",function(){
       //Displays 100 items related to the searched product  ///////////////////////////////////////////
       $("#new-input").empty();
       for(i = 0; i < 100; i++){
+        console.log(response.productsArray[i].upc)
         // $("#new-input").append("<tr><td>" + response.productsArray[i].product_name + "</td><td>" + response.productsArray[i].upc + "</td><td>" + selectedToggle[0]);
         var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
         $("#new-input").append("<tr><td><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td><td></td><td>");

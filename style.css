@@ -1,13 +1,20 @@
 body {
-	font-family: "Helvetica Neue";
+	font-family: 'Cutive Mono', monospace, "Helvetica";
+	font-size: 14px;
 }
 
 #upcInput {
 	width: 100%;
-	height
+	height: auto;
 }
+
 .jumbotron h1 {
+	font-family: 'Permanent Marker', cursive;
 	color: #e00;
+}
+
+.jumbotron h4{
+	font-family: 'Pacifico', cursive;
 }
 
 .allergen-icons {

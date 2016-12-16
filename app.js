@@ -18,18 +18,20 @@
 
   $(document).ready(function() {
     if(getQueryVariable('upc') != false) {
-      //console.log(getQueryVariable('upc'));
       getAllergens(getQueryVariable('upc'));
 
       $("#search-results").removeClass("displayOff");
-
+      $("#recentSearches").removeClass("displayOff");
       database.ref().push({
-        newUpc: upc
+        newUpc: getQueryVariable('upc'),
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
+
     }
-  
-    //$("#recentSearches").append(upc);
-    
+
+    database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {   
+      $("#new-recent-search").append("<tr><td>" + snapshot.val().newUpc + "</td></tr>");
+    }); 
 
   });
 
@@ -58,19 +60,24 @@
     });
 
     $("#productInput").val("");
+
+    productSearch(searchInput);
+  });
+
+  //Function that calls API for product search
+  function productSearch(productName){
+    searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + productName + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&n=100&s=0&f=json&api_key=" + labelAPIkey;
     $.ajax({
         url: searchURL,    
         method: 'GET'
     }).done(function(response) {
       //Displays 100 items related to the searched product
-      $("#new-input").empty();
       for(i = 0; i < 100; i++){
         var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
-        $("#new-input").append("<tr><td class='productLink'><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td><td></td><td>");
+        $("#new-input").append("<tr><td><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td></tr>");
       }  
     });
-
-  });
+  }
 
   function getQueryVariable(variable){
        var query = window.location.search.substring(1);
@@ -82,6 +89,7 @@
        return(false);
   }
 
+  //Function that lists all allergens and additives of product chosen fromm productSearch function
   function getAllergens(upc) {
     upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upc + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
     console.log(upcURL);
@@ -128,10 +136,6 @@
       }, 1500);
 
       relatedItems(upcresponse.product_name);
-
-      database.ref().push({
-        upcInput: upc
-      });
     });
   }
   

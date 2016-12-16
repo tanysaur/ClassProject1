@@ -48,8 +48,7 @@ body {
 	background-color: #e00;
 }
 
-#search-results {
-    width: auto;
+.table-responsive {
     height: 300px;
     overflow: scroll;
 }

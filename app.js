@@ -1,21 +1,3 @@
-$(document).ready(function() {
-  if(getQueryVariable('upc') != false) {
-    //console.log(getQueryVariable('upc'));
-    getAllergens(getQueryVariable('upc'));
-  }
-  $("#search-results").addClass("displayOff");
-});
-
-$(window).on("orientationchange",function(){
-      //alert("The orientation has changed!");
-      if(window.orientation == 0){ // Portrait
-        $("p").css({"background-color":"yellow"});
-      }
-      else { //Landscape
-        $("p").css({"background-color":"pink"});
-      }
-  });
-
 //Initialize Firebase
   var config = {
     apiKey: "AIzaSyD5XYZHecNShIOC9c69lKZgIVPYyHyysF8",
@@ -34,10 +16,38 @@ $(window).on("orientationchange",function(){
   var searchInput = '';
   var labelURL = ''; 
 
+  $(document).ready(function() {
+    if(getQueryVariable('upc') != false) {
+      //console.log(getQueryVariable('upc'));
+      getAllergens(getQueryVariable('upc'));
+
+      $("#search-results").removeClass("displayOff");
+
+      database.ref().push({
+        newUpc: upc
+      });
+    }
+  
+    //$("#recentSearches").append(upc);
+    
+
+  });
+
+  $(window).on("orientationchange",function(){
+        //alert("The orientation has changed!");
+        if(window.orientation == 0){ // Portrait
+          $("p").css({"background-color":"yellow"});
+        }
+        else { //Landscape
+          $("p").css({"background-color":"pink"});
+        }
+    });
+
 //Click event for searching products
   $(document).on("click", "#add-product", function() { 
     $(".resultPanels").addClass("displayOff");
     $("#search-results").removeClass("displayOff");
+    $("#recentSearches").removeClass("displayOff");
     
     searchInput = $("#productInput").val().trim();
     searchURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/searchprods?q=" + searchInput + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&n=100&s=0&f=json&api_key=" + labelAPIkey;
@@ -59,6 +69,7 @@ $(window).on("orientationchange",function(){
         $("#new-input").append("<tr><td class='productLink'><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td><td></td><td>");
       }  
     });
+
   });
 
   function getQueryVariable(variable){
@@ -80,6 +91,7 @@ $(window).on("orientationchange",function(){
     }).done(function(upcresponse) {
       //Show results of all allergens active in the product's ingredient
       $(".resultPanels").removeClass("displayOff");
+      $("#search-results").addClass("displayOff");
       $("#new-UPCInput-Allergen").empty();
       $("#new-UPCInput-Additive").empty();
       $("#thisProduct").empty();

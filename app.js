@@ -34,66 +34,7 @@ $(window).on("orientationchange",function(){
   var searchInput = '';
   var labelURL = ''; 
 
-  function getQueryVariable(variable){
-       var query = window.location.search.substring(1);
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-         var pair = vars[i].split("=");
-         if(pair[0] == variable){return pair[1];}
-       }
-       return(false);
-  }
-
-  function getAllergens(upc) {
-    upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upc + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
-
-     $.ajax({
-        url: upcURL,
-        method: 'GET'
-    }).done(function(upcresponse) {
-      //Show results of all allergens active in the product's ingredient
-      $(".resultPanels").removeClass("displayOff");
-      $("#new-UPCInput-Allergen").empty();
-      $("#new-UPCInput-Additive").empty();
-      $(".thisProduct").empty();
-
-      //Show product name as title of results panel div
-      $(".thisProduct").append(upcresponse.product_name + " (" + upc + ")");
-      //Loop through each allergen in the product
-      for(i = 0; i < 15; i++){
-        if (upcresponse.allergens[i].allergen_value >= 1){
-          $("#new-UPCInput-Allergen").append(
-          "<div><strong>" + upcresponse.allergens[i].allergen_name + "</strong><br>"  + "Allergen value: "
-          + upcresponse.allergens[i].allergen_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.allergens[i].allergen_red_ingredients  
-          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.allergens[i].allergen_yellow_ingredients + "<br><br>");
-         }
-      }
-
-      //Loop through each additive in the product
-      for(i = 0; i <21; i++){
-        if (upcresponse.additives[i].additive_value >= 1){
-          $("#new-UPCInput-Additive").append(
-          "<div><strong>" + upcresponse.additives[i].additive_name + "</strong><br>"  + "Additive value: "
-          + upcresponse.additives[i].additive_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.additives[i].additive_red_ingredients  
-          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.additives[i].additive_yellow_ingredients + "<br><br>");
-        }
-      }
-
-      //Scroll to results panel
-      $('html, body').animate({
-          scrollTop: $("#new-UPCInput-Allergen").offset().top
-      }, 1500);
-
-      relatedItems(upcresponse.product_name);
-
-      database.ref().push({
-        upcInput: upc
-      });
-    });
-  }
-  
-
-  //Click event for searching products
+//Click event for searching products
   $(document).on("click", "#add-product", function() { 
     $(".resultPanels").addClass("displayOff");
     $("#search-results").removeClass("displayOff");
@@ -120,6 +61,67 @@ $(window).on("orientationchange",function(){
     });
   });
 
+  function getQueryVariable(variable){
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+         var pair = vars[i].split("=");
+         if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+  }
+
+  function getAllergens(upc) {
+    upcURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/label?u=" + upc + "&sid=" + "3bf8bb6f-99d8-42f6-a422-3a8c37a10de8" + "&appid=demoApp_01&f=json" + "&api_key=" + labelAPIkey;
+    console.log(upcURL);
+     $.ajax({
+        url: upcURL,
+        method: 'GET'
+    }).done(function(upcresponse) {
+      //Show results of all allergens active in the product's ingredient
+      $(".resultPanels").removeClass("displayOff");
+      $("#new-UPCInput-Allergen").empty();
+      $("#new-UPCInput-Additive").empty();
+      $("#thisProduct").empty();
+
+      console.log(upcresponse);
+      //Show product name as title of results panel div
+      $("#thisProduct").append(upcresponse.product_name + " (" + upc + ")");
+      //Loop through each allergen in the product
+      for(i = 0; i < 15; i++){
+        // if(upcresponse == null){ // Checks if UPC is not in the API
+        //   $("#thisProduct").append("Sorry " + upcresponse.product_name + " (" + upc + ")" + " is not in our records!");
+        // }
+        if (upcresponse.allergens[i].allergen_value >= 1){
+          $("#new-UPCInput-Allergen").append(
+          "<div><strong>" + upcresponse.allergens[i].allergen_name + "</strong><br>"  + "Allergen value: "
+          + upcresponse.allergens[i].allergen_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.allergens[i].allergen_red_ingredients  
+          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.allergens[i].allergen_yellow_ingredients + "<br><br>");
+         }
+      }
+
+      //Loop through each additive in the product
+      for(i = 0; i <21; i++){
+        if (upcresponse.additives[i].additive_value >= 1){
+          $("#new-UPCInput-Additive").append(
+          "<div><strong>" + upcresponse.additives[i].additive_name + "</strong><br>"  + "Additive value: "
+          + upcresponse.additives[i].additive_value + "<br>" + " <span class='redIngredients'>Red: " + upcresponse.additives[i].additive_red_ingredients  
+          + "<br>" +  " <span class='yellowIngredients'>Yellow: " + upcresponse.additives[i].additive_yellow_ingredients + "<br><br>");
+        }
+      }
+
+      //Scroll to results panel
+      $('html, body').animate({
+          scrollTop: $("#thisProduct").offset().top
+      }, 1500);
+
+      relatedItems(upcresponse.product_name);
+
+      database.ref().push({
+        upcInput: upc
+      });
+    });
+  }
   
   //Call related items from Walmart API
   function relatedItems(data){
@@ -141,32 +143,6 @@ $(window).on("orientationchange",function(){
     })
   }
 
-  // // Click event when searching by UPC
-  // $(document).on("click", ".productLink", function(){
-  //   getAllergens(getQueryVariable('upc'));
-  //   //upcInput = $("#upcInput").val().trim();
-  // });
-
-  // //Toggles button
-  // $(".allergen-icons-button").on("click", function(){
-  //     $(this).toggleClass('selected');
-  // })
-
-  // window.onload = function(){   
-  //   var sessionURL = "http://cors-anywhere.herokuapp.com/http://api.foodessentials.com/createsession?uid=demoUID_01&devid=demoDev_01&appid=demoApp_01&f=json&api_key=x49rczhgarkyz7hzpxsez2nn";
-  //   $.ajax({
-  //     url: sessionURL,
-  //     method: 'GET'
-  //   }).done(function(session) {
-      
-  //     sid = session.session_id;
-  //     console.log("SID: " +sid);
-
-  //     database.ref().push({
-  //       sessionID: sid
-  //     })
-  //   })
-  // }
 
 //Reference(s):
 //CSS Tricks - getQueryVariable function

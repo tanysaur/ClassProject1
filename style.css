@@ -16,13 +16,13 @@ body {
 
 .jumbotron h1 {
 	font-family: 'Permanent Marker', cursive;
-	color: #e00;
+	color: #9db;
 	/*font-size: 100px;*/
 }
 
 .jumbotron h4{
 	font-family: 'Pacifico', cursive;
-	color: black;
+	color: #e00;
 }
 
 .jumbotron a {

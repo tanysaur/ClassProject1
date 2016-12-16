@@ -1,3 +1,11 @@
+$(document).ready(function() {
+  if(getQueryVariable('upc') != false) {
+    //console.log(getQueryVariable('upc'));
+    getAllergens(getQueryVariable('upc'));
+  }
+  $("#search-results").addClass("displayOff");
+});
+
 $(window).on("orientationchange",function(){
       //alert("The orientation has changed!");
       if(window.orientation == 0){ // Portrait
@@ -47,7 +55,6 @@ $(window).on("orientationchange",function(){
       $(".resultPanels").removeClass("displayOff");
       $("#new-UPCInput-Allergen").empty();
       $("#new-UPCInput-Additive").empty();
-
       $(".thisProduct").empty();
 
       //Show product name as title of results panel div
@@ -86,14 +93,6 @@ $(window).on("orientationchange",function(){
   }
   
 
-  $(document).ready(function() {
-    if(getQueryVariable('upc') != false) {
-      //console.log(getQueryVariable('upc'));
-      getAllergens(getQueryVariable('upc'));
-    }
-    $("#search-results").addClass("displayOff");
-  });
-
   //Click event for searching products
   $(document).on("click", "#add-product", function() { 
     $(".resultPanels").addClass("displayOff");
@@ -115,7 +114,6 @@ $(window).on("orientationchange",function(){
       //Displays 100 items related to the searched product
       $("#new-input").empty();
       for(i = 0; i < 100; i++){
-        // $("#new-input").append("<tr><td>" + response.productsArray[i].product_name + "</td><td>" + response.productsArray[i].upc + "</td><td>" + selectedToggle[0]);
         var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
         $("#new-input").append("<tr><td class='productLink'><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td><td></td><td>");
       }  
@@ -134,10 +132,11 @@ $(window).on("orientationchange",function(){
       $("#relatedItems").empty();
       $("#relatedItems").removeClass("displayOff");
       for (i = 0; i <10; i++){
+        var walmartUpcVariable = window.location.pathname + '?upc=' + walmartResponse.items[i].upc;
         $("#relatedItems").append("<div class='imageInline'>" + "<br>" +
           walmartResponse.items[i].name + "<br>" + 
           "<a href='" +  walmartResponse.items[i].productUrl + "' target='_blank'>" + "<img class='relatedItemsFromWalmart' src=" + walmartResponse.items[i].thumbnailImage + "/>" + "</a>" +
-          "<br>" + " Price: $" + walmartResponse.items[i].salePrice + "<br>" + "UPC: " + walmartResponse.items[i].upc + "</p></div> ");
+          "<br>" + " Price: $" + walmartResponse.items[i].salePrice + "<br>" + "UPC: " + "<a href='" + walmartUpcVariable + "'>" + walmartResponse.items[i].upc + "</a>" + "</p></div> ");
       }
     })
   }

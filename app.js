@@ -1,3 +1,14 @@
+$(window).on("orientationchange",function(){
+    //alert("The orientation has changed!");
+    if(window.orientation == 0){ // Portrait
+      $("p").css({"background-color":"yellow"});
+    }
+    else { //Landscape
+      $("p").css({"background-color":"pink"});
+    }
+});
+
+$(document).ready(function() {
 //Initialize Firebase
   var config = {
     apiKey: "AIzaSyD5XYZHecNShIOC9c69lKZgIVPYyHyysF8",
@@ -16,36 +27,25 @@
   var searchInput = '';
   var labelURL = ''; 
 
-  $(document).ready(function() {
-    if(getQueryVariable('upc') != false) {
-      getAllergens(getQueryVariable('upc'));
+  
+  //Check for UPCs in the page URL
+  if(getQueryVariable('upc') != false) {
+    getAllergens(getQueryVariable('upc'));
 
-      $("#search-results").removeClass("displayOff");
-      $("#recentSearches").removeClass("displayOff");
-      database.ref().push({
-        newUpc: getQueryVariable('upc'),
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-      });
-
-    }
-
-    database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {   
-      $("#new-recent-search").append("<tr><td>" + snapshot.val().newUpc + "</td></tr>");
-    }); 
-
-  });
-
-  $(window).on("orientationchange",function(){
-        //alert("The orientation has changed!");
-        if(window.orientation == 0){ // Portrait
-          $("p").css({"background-color":"yellow"});
-        }
-        else { //Landscape
-          $("p").css({"background-color":"pink"});
-        }
+    $("#search-results").removeClass("displayOff");
+    $("#recentSearches").removeClass("displayOff");
+    database.ref().push({
+      newUpc: getQueryVariable('upc'),
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
+  }
 
-//Click event for searching products
+  database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function(snapshot) {   
+    $("#new-recent-search").append("<tr><td>" + snapshot.val().newUpc + "</td></tr>");
+  }); 
+
+
+    //Click event for searching products
   $(document).on("click", "#add-product", function() { 
     $(".resultPanels").addClass("displayOff");
     $("#search-results").removeClass("displayOff");
@@ -76,7 +76,7 @@
         var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
         $("#new-input").append("<tr><td><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td></tr>");
       }  
-    });
+    }); 
   }
 
   function getQueryVariable(variable){
@@ -158,6 +158,7 @@
       }
     })
   }
+  });
 
 
 //Reference(s):

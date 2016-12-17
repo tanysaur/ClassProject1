@@ -1,6 +1,7 @@
 body {
 	font-family: 'Cutive Mono', monospace, "Helvetica";
 	font-size: 18px;
+	background-color: #e2ebf3;
 }
 
 #upcInput {
@@ -9,15 +10,16 @@ body {
 }
 
 .jumbotron{
-	background-image: url("assets/images/diff-allergens.jpg");
+	/*background-image: url("assets/images/diff-allergens.jpg");*/
 	background-position: top;
 	background-size: cover;
+	background-color: #e2ebf3;
 }
 
 .jumbotron h1 {
 	font-family: 'Permanent Marker', cursive;
-	color: #9db;
-	/*font-size: 100px;*/
+	color: #3db;
+	font-size: 86px;
 }
 
 .jumbotron h4{
@@ -40,14 +42,6 @@ body {
 	height: 60px;
 }
 
-.allergen-icons-div {
-	border: 1px solid red;
-}
-
-.allergen-icons-button.selected {
-	background-color: #e00;
-}
-
 .table-responsive {
     height: 300px;
     overflow: scroll;
@@ -62,14 +56,13 @@ body {
 }
 
 .yellowIngredients{
-	color: #fa5;
+	color: #ff9900;
 }
 
 .relatedItemsFromWalmart{
 	height: 100px;
 	margin: 2px;
 }
-
 
 .imageInline {
 	margin: 5px;
@@ -78,6 +71,46 @@ body {
 	width: 300px;
 	padding: 5px;
 	border-radius: 5px;
+}
+
+strong {
+	font-size: 22px;
+}
+/* all panelbody shall have same color*/
+.panel-heading {
+	font-weight: bold;
+}
+
+.panel-body {
+	/*background-color: #f2f2f2;*/
+	font-weight: bold;
+}
+
+.panel-info>.panel-heading {
+    color: #ffffff;
+    background-color: #dd4814;
+    border-color: #dd4814;
+}
+
+
+/* Rules for screen widths at 768px or lower */
+
+@media only screen and (max-width: 768px) {
+	.container {
+		width: 600px;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.container {
+		width: 480px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.container {
+		width: 300px;
+	}
 }
 
 /*Reference(s):

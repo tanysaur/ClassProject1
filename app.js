@@ -76,6 +76,11 @@ $(document).ready(function() {
         var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
         $("#new-input").append("<tr><td><a href='" + productVariable + "'>" + response.productsArray[i].product_name + "</a></td></tr>");
       }  
+
+      //Scroll to results panel
+      $('html, body').animate({
+          scrollTop: $("#search-results").offset().top
+      }, 1500);
     }); 
   }
 

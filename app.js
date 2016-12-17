@@ -119,12 +119,14 @@ $(document).ready(function() {
       console.log(upcresponse);
       //Show product name as title of results panel div
      
-      $("#thisProduct").append(upcresponse.product_name + " (" + upc + ")");
 
-      //Alert for UPCs not in the API
-      if(!upcresponse.productsArray){ // Checks if UPC is not in the API
-        $("#thisProduct").append(" -- Sorry this product not in our records!");
-      }
+      $("#thisProduct").append(upcresponse.product_name + " (" + upc + ")");
+      // //Alert for UPCs not in the API
+      // if(!upcresponse.productsArray){ // Checks if UPC is not in the API
+      //   $("#thisProduct").append(" --Sorry this is not in our records!");
+      // }
+
+      
 
       //Loop through each allergen in the product
       for(i = 0; i < 15; i++){

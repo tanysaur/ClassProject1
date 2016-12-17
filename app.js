@@ -71,6 +71,12 @@ $(document).ready(function() {
         url: searchURL,    
         method: 'GET'
     }).done(function(response) {
+      
+ //Alert provided if product entered is not in database or misspelled.//////////////////////////////////
+      if (!response.productsArray) {
+        alert("ERROR: PRODUCT NOT AVAILABLE OR MISSPELLED");
+      }
+
       //Displays 100 items related to the searched product
       for(i = 0; i < 100; i++){
         var productVariable = window.location.pathname + '?upc=' + response.productsArray[i].upc;
@@ -81,6 +87,7 @@ $(document).ready(function() {
       $('html, body').animate({
           scrollTop: $("#search-results").offset().top
       }, 500);
+    
     }); 
   }
 
@@ -111,12 +118,17 @@ $(document).ready(function() {
 
       console.log(upcresponse);
       //Show product name as title of results panel div
+     
       $("#thisProduct").append(upcresponse.product_name + " (" + upc + ")");
+
+      //Alert for UPCs not in the API
+      if(!upcresponse.productsArray){ // Checks if UPC is not in the API
+        $("#thisProduct").append(" -- Sorry this product not in our records!");
+      }
+
       //Loop through each allergen in the product
       for(i = 0; i < 15; i++){
-        // if(upcresponse == null){ // Checks if UPC is not in the API
-        //   $("#thisProduct").append("Sorry " + upcresponse.product_name + " (" + upc + ")" + " is not in our records!");
-        // }
+        
         if (upcresponse.allergens[i].allergen_value >= 1){
           $("#new-UPCInput-Allergen").append(
           "<div><strong>" + upcresponse.allergens[i].allergen_name + "</strong><br>"  + "Allergen value: "

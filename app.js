@@ -126,8 +126,6 @@ $(document).ready(function() {
       //   $("#thisProduct").append(" --Sorry this is not in our records!");
       // }
 
-      
-
       //Loop through each allergen in the product
       for(i = 0; i < 15; i++){
         

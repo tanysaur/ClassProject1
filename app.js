@@ -80,7 +80,7 @@ $(document).ready(function() {
       //Scroll to results panel
       $('html, body').animate({
           scrollTop: $("#search-results").offset().top
-      }, 1500);
+      }, 500);
     }); 
   }
 
@@ -138,7 +138,7 @@ $(document).ready(function() {
       //Scroll to results panel
       $('html, body').animate({
           scrollTop: $("#thisProduct").offset().top
-      }, 1500);
+      }, 500);
 
       relatedItems(upcresponse.product_name);
     });

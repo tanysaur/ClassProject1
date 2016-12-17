@@ -18,13 +18,13 @@ body {
 
 .jumbotron h1 {
 	font-family: 'Permanent Marker', cursive;
-	color: #3db;
+	color: #FF2419;
 	font-size: 86px;
 }
 
 .jumbotron h4{
 	font-family: 'Pacifico', cursive;
-	color: #e00;
+	/*color: #B26E00;*/
 }
 
 .jumbotron a {
@@ -73,7 +73,12 @@ body {
 	border-radius: 5px;
 }
 
-strong {
+th {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+strong{
 	font-size: 22px;
 }
 /* all panelbody shall have same color*/

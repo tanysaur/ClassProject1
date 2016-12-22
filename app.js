@@ -74,7 +74,9 @@ $(document).ready(function() {
       
  //Alert provided if product entered is not in database or misspelled.//////////////////////////////////
       if (!response.productsArray) {
+         $("#search-results").addClass("displayOff");
         alert("ERROR: PRODUCT NOT AVAILABLE OR MISSPELLED");
+
       }
 
       //Displays 100 items related to the searched product
